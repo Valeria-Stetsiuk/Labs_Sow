@@ -22,8 +22,12 @@ class Request
         return $_POST ?? null;
     }
 
-    public function get(): array|null
+
+    public function get(string $key = ''): array|string|null
     {
+        if(!empty($key)) {
+            return $_GET[$key] ?? null;
+        }
        return $_GET ?? null;
     }
 

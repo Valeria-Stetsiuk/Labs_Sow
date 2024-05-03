@@ -56,7 +56,23 @@ class Render {
     public function renderAjax()
     {
         header('Content-Type: application/json; charset=utf-8');
+        header(sprintf('HTTP/1.1 %s' ,$this->_builder->statusCode));
         echo json_encode($this->_builder->variable ?? '');
+        exit();
+    }
+
+    public function renderXml()
+    {
+        $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><xml/>');
+
+        foreach ($this->_builder->variable ?? [] as $value) {
+            $track = $xml->addChild('items');
+            foreach ($value as $key_item => $value_item) {
+                $track->addChild($key_item, htmlspecialchars($value_item)); // Для безопасности экранируем спецсимволы
+            }
+        }
+        Header('Content-type: text/xml');
+        echo $xml->asXML();
         exit();
     }
 

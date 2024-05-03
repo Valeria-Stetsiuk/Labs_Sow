@@ -72,6 +72,6 @@ interface PageBuilderInterface
 
     public function renderPage();
 
-
+    public function setStatusCode(int $code):PageBuilderInterface;
 
 }

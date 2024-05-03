@@ -135,6 +135,7 @@ abstract class CoreServices
             case 'int':
                return is_numeric($value);
             case 'string':
+            case 'str':
                return is_string($value) && !empty($value);
             case 'first_name':
             case 'last_name':

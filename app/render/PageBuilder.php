@@ -130,6 +130,13 @@ class PageBuilder implements PageBuilderInterface
     public function setTemplateClass(string $class):PageBuilderInterface
     {
         $this->_data_object->template_class = $class;
+
+        return $this;
+    }
+
+    public function setStatusCode(int $code = 200): PageBuilderInterface
+    {
+        $this->_data_object->statusCode =  $code;
         return $this;
     }
 

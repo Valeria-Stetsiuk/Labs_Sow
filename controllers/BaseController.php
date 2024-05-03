@@ -26,15 +26,16 @@ abstract class BaseController
     /**
      * @param string $page * - file name
      * @param array $__data_controller_array__ - data for page
+     * @param int $code
      */
-    public function renderAjax($page = '', array $variables = []):void
+    public function renderAjax($page = '', array $variables = [], $code = 200):void
     {
         $build = new PageBuilder();
         $build->setVariable($variables);
-
+        $build->setStatusCode($code);
         if (!empty($page) ) {
             $build->setPageTemplate($page);
-            (new Render($build))->renderAjaxPge();
+            (new Render($build))->renderAjaxPage();
         } else {
             (new Render($build))->renderAjax();
         }
@@ -52,6 +53,13 @@ abstract class BaseController
             ->setTemplateName($page)
             ->setVariable($data_controller_array);
         (new Render($builder))->render();
+    }
+
+    public function renderXml(array $data = [])
+    {
+        $build = new PageBuilder();
+        $build->setVariable($data);
+        (new Render($build))->renderXml();
     }
 
 }
